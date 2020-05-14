@@ -2,24 +2,36 @@
 
  function getArticles()
  {
-     require ('connect.php');
+    require ('connect.php');
 
-        $req= $bdd->prepare('SELECT id, titre, date FROM articles ORDER BY id DESC');
+    $req= $bdd->prepare('SELECT * FROM articles ORDER BY id DESC');
 
 	 	$req->execute();
 
-	 	$data = $req->fetchAll(PDO::FETCH_OBJ);
+	 	$data = $req->fetchAll(PDO::FETCH_OBJ);//->setFetchMode(PDO::FETCH_OBJ)
 
 	 	return $data;
 
 	 	$req->closeCursor();
  }
 
+   function deleteArticle($id)
+{
+    require ('connect.php');
+
+    $req= $bdd->prepare('DELETE * FROM articles WHERE id=?');
+
+    $req->execute( array($id) );
+
+    $req->closeCursor();
+ }
+
+
 function getArticle($id)
 {
 	require('connect.php');
 
-    $req=$bdd->prepare('SELECT * FROM articles WHERE id= ?');
+    $req=$bdd->prepare('SELECT id, titre, image, contenus,date FROM articles WHERE id= ?');
     $req->execute(array($id));
 
     if($req->rowCount()== 1)
@@ -35,9 +47,10 @@ function getArticle($id)
      $req->closeCursor();
 }
 
+
 function addCommentaire($articleId, $auteur, $commentaire)
 {
-  require ('config/connect.php');
+  require ('connect.php');
 
   //ne concerne que la database 
   $req=$bdd->prepare('INSERT INTO commentaires (articleId, auteur, commentaire, date) VALUES (?, ?, ?, NOW())');
@@ -47,5 +60,19 @@ function addCommentaire($articleId, $auteur, $commentaire)
 
   $req->closeCursor();
 }
+
+          function getCommentaire($id)
+          {
+            require ('connect.php');
+            
+            $req= $bdd->prepare('SELECT * FROM commentaires WHERE articleId=?');
+            $req->execute(array($id));
+
+            $data= $req->fetchAll(PDO::FETCH_OBJ);
+
+            return $data;
+
+            $req->closeCursor();
+          }
 
 ?>
