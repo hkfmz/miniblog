@@ -8,7 +8,7 @@ Réalisation d'un Blog pour la publication d'articles en ligne...
 * **Hegel Khaled F. Motokoua Z.**
 
 # Social
-* [Facebook](https://www.facebook.com/appenligne) 
+* [Page Facebook](https://www.facebook.com/appenligne) 
 * [ma chaîne Youtube](https://www.youtube.com/channel/UCpF8HCFJADce_5Iyfbjudbw)
 
 ## Portofolio
